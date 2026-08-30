@@ -4,13 +4,13 @@ import { speak } from '../utils/speak.js';
 // Small round button that speaks the given Korean text aloud.
 export function SpeakerButton({ text, large = false, className = '', onClick }) {
   const size = large ? 'w-[34px] h-[34px]' : 'w-[26px] h-[26px]';
-  const iconSize = large ? 'w-4 h-4' : 'w-[13px] h-[13px]';
+  const iconSize = large ? 'w-6 h-6' : 'w-[20px] h-[20px]';
   return (
     <button
       type="button"
       title="শুনুন"
       onClick={(e) => { e.stopPropagation(); if (onClick) onClick(); else speak(text); }}
-      className={`${size} rounded-full bg-ink text-paper flex items-center justify-center flex-none
+      className={`${size} rounded-full text-ink flex items-center justify-center flex-none
         transition hover:bg-red hover:scale-110 ${className}`}
     >
       <SpeakerIcon className={iconSize} />
@@ -31,8 +31,8 @@ export function Eyebrow({ children }) {
 // Generic card block, matches the .card style from the original design.
 export function Card({ accent = false, className = '', children }) {
   return (
-    <div className={`bg-paper-card border border-line rounded p-[18px] shadow-[0_10px_26px_-14px_rgba(28,23,18,.4)]
-      ${accent ? 'border-l-4 border-l-red' : ''} ${className}`}>
+    <div className={`torn-paper p-5 relative ${className}`}>
+      {accent && <span className="absolute top-3 left-3 w-2 h-2 rounded-full bg-red" />}
       {children}
     </div>
   );

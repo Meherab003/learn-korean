@@ -70,15 +70,17 @@ export default function Builder() {
           </div>
         </div>
 
-        <div className="relative overflow-hidden bg-ink rounded p-7.5 text-center shadow-xl border-[3px] border-red
-          lg:sticky lg:top-[76px]">
-          <div className={`font-hero text-[5.5rem] text-paper font-black min-h-[1.3em] ${pulse ? 'animate-pulse-once' : ''}`}>
+        <div className="relative overflow-hidden torn-paper p-8 text-center shadow-xl lg:sticky lg:top-[76px]">
+          <div className="absolute top-3 right-3 w-10 h-10 rounded-sm bg-red flex items-center justify-center rotate-[-6deg] shadow-lg">
+            <span className="font-hero text-white font-black text-sm">音</span>
+          </div>
+          <div className={`font-kr text-[6rem] text-ink font-black min-h-[1.3em] ${pulse ? 'animate-pulse-once' : ''}`}>
             {syllable}
           </div>
-          <div className="font-mono text-red-tint mt-2.5">{rom}</div>
-          <div className="font-bn mt-1" style={{ color: '#cfc4a4' }}>উচ্চারণ আন্দাজ: {rom}</div>
+          <div className="font-mono text-red-deep mt-2.5 font-semibold">{rom}</div>
+          <div className="font-bn mt-1 text-ink-soft">উচ্চারণ আন্দাজ: {rom}</div>
           <div className="mt-4.5">
-            <Btn className="!bg-red hover:!bg-red-deep" onClick={() => speak(syllable)}>
+            <Btn onClick={() => speak(syllable)}>
               <SpeakerIcon className="w-[13px] h-[13px]" /> উচ্চারণ শুনুন
             </Btn>
           </div>

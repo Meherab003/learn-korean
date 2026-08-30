@@ -10,8 +10,7 @@ function LetterTile({ item, type, onSelect }) {
   return (
     <div
       onClick={() => onSelect(item, type)}
-      className="relative bg-paper-card border border-line rounded p-3.5 px-2.5 text-center cursor-pointer
-        transition hover:-translate-y-1 hover:border-red hover:shadow-lg"
+      className="relative torn-paper p-4 px-3 text-center cursor-pointer transition hover:-translate-y-1"
     >
       <SpeakerButton text={item.g} className="absolute top-1.5 right-1.5" />
       <div className="font-hero text-[2.4rem] font-bold">{item.g}</div>
@@ -55,9 +54,12 @@ export default function Hangul() {
               <span
                 key={i}
                 title={`${it.rom} — ${it.bn}`}
-                className="font-kr font-black text-ink text-[2.1rem] sm:text-[2.5rem] leading-none cursor-default
+                className="font-brush inline-block text-ink text-[3rem] sm:text-[3.6rem] leading-none cursor-default
                   transition hover:text-red hover:-translate-y-0.5"
-                style={{ textShadow: '0 1px 0 rgba(28,23,18,.08)' }}
+                style={{
+                  textShadow: '1px 1px 3px rgba(28,23,18,.28)',
+                  transform: `rotate(${((i * 37) % 7) - 3}deg)`,
+                }}
               >
                 {it.g}
               </span>
