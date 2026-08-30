@@ -1,0 +1,94 @@
+import { useState } from 'react';
+import { CHO, JUNG, JONG, CHO_ROM, JUNG_ROM, JONG_ROM } from '../data/numbers.js';
+import { Eyebrow, Btn } from '../components/UI.jsx';
+import { InkDivider, SpeakerIcon } from '../components/Icons.jsx';
+import { speak } from '../utils/speak.js';
+
+function ChipRow({ id, items, selected, onSelect }) {
+  return (
+    <div className="flex flex-wrap gap-1.5 max-h-[150px] overflow-y-auto p-0.5">
+      {items.map((ch, i) => (
+        <button
+          key={i}
+          onClick={() => onSelect(i)}
+          className={`border rounded px-2.5 py-1.5 font-hero text-[1.05rem] cursor-pointer transition
+            ${selected === i ? 'bg-red text-white border-red' : 'bg-paper-card border-line hover:border-red'}`}
+        >
+          {id === 'final' && ch === '' ? '(নেই)' : ch}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function Builder() {
+  const [cho, setCho] = useState(0);
+  const [jung, setJung] = useState(0);
+  const [jong, setJong] = useState(0);
+  const [pulse, setPulse] = useState(false);
+
+  const code = 0xac00 + (cho * 21 + jung) * 28 + jong;
+  const syllable = String.fromCharCode(code);
+  const rom = CHO_ROM[cho] + JUNG_ROM[jung] + (jong > 0 ? JONG_ROM[jong] : '');
+
+  function select(setter) {
+    return (i) => { setter(i); setPulse(false); requestAnimationFrame(() => setPulse(true)); };
+  }
+
+  return (
+    <div>
+      <Eyebrow>02 · 음절 조립하기</Eyebrow>
+      <h1 className="font-hero font-extrabold text-3xl mt-1">সিলেবল ব্লক তৈরি করুন</h1>
+      <div className="font-bn font-semibold text-ink-soft mt-0.5">
+        কোরিয়ান লেখা হয় বর্ণকে একটি বর্গাকার ব্লকে জোড়া দিয়ে — ইংরেজির মতো লাইন ধরে ধরে নয়।
+      </div>
+      <InkDivider />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+        <div>
+          <div className="mb-3.5">
+            <div className="font-mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft mb-1.5">
+              ১. প্রথম ব্যঞ্জনবর্ণ (Initial) — বাধ্যতামূলক
+            </div>
+            <ChipRow id="cho" items={CHO} selected={cho} onSelect={select(setCho)} />
+          </div>
+          <div className="mb-3.5">
+            <div className="font-mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft mb-1.5">
+              ২. স্বরবর্ণ (Medial) — বাধ্যতামূলক
+            </div>
+            <ChipRow id="jung" items={JUNG} selected={jung} onSelect={select(setJung)} />
+          </div>
+          <div className="mb-3.5">
+            <div className="font-mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft mb-1.5">
+              ৩. শেষ ব্যঞ্জনবর্ণ / ব্যাচিম (Final) — ঐচ্ছিক
+            </div>
+            <ChipRow id="final" items={JONG} selected={jong} onSelect={select(setJong)} />
+          </div>
+          <div className="relative bg-red-tint px-4.5 py-4.5 text-[.9rem] mt-6 mb-2">
+            <b className="text-ink">ব্যাচিম (받침)</b> কী: সিলেবলের নিচে বসা বাড়তি ব্যঞ্জনবর্ণ, যেমন 한(han)-এ ㄴ।
+            না থাকলে সিলেবল শুধু ব্যঞ্জন+স্বর দিয়ে শেষ হয়, যেমন 가(ga)।
+          </div>
+        </div>
+
+        <div className="relative overflow-hidden bg-ink rounded p-7.5 text-center shadow-xl border-[3px] border-red
+          lg:sticky lg:top-[76px]">
+          <div className={`font-hero text-[5.5rem] text-paper font-black min-h-[1.3em] ${pulse ? 'animate-pulse-once' : ''}`}>
+            {syllable}
+          </div>
+          <div className="font-mono text-red-tint mt-2.5">{rom}</div>
+          <div className="font-bn mt-1" style={{ color: '#cfc4a4' }}>উচ্চারণ আন্দাজ: {rom}</div>
+          <div className="mt-4.5">
+            <Btn className="!bg-red hover:!bg-red-deep" onClick={() => speak(syllable)}>
+              <SpeakerIcon className="w-[13px] h-[13px]" /> উচ্চারণ শুনুন
+            </Btn>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative bg-red-tint px-4.5 py-4.5 text-[.9rem] mt-8">
+        <b>নিয়ম মনে রাখুন:</b> প্রতিটি কোরিয়ান সিলেবল = <b>ব্যঞ্জন + স্বর (+ ব্যাচিম ঐচ্ছিক)</b>।
+        স্বরবর্ণ একা কখনো লেখা হয় না — নীরব বাহক হিসেবে <b>ㅇ</b> বসে (যেমন 아 = a)।
+      </div>
+    </div>
+  );
+}

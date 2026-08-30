@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/* ============================================================
+   THEME TOKENS — hanji paper + red seal palette.
+   Change these to re-theme the whole app.
+============================================================ */
+@theme {
+  --color-paper: #efe6cc;
+  --color-paper-2: #e6d8b0;
+  --color-paper-card: #f8f1dd;
+  --color-ink: #1c1712;
+  --color-ink-soft: #4d4432;
+  --color-ink-faint: #7a6f57;
+  --color-red: #a3272a;
+  --color-red-deep: #7a1c1f;
+  --color-red-tint: #f0dccf;
+  --color-line: #c9b98c;
+
+  --font-hero: 'Nanum Myeongjo', 'Noto Serif Bengali', serif;
+  --font-kr: 'Noto Serif KR', serif;
+  --font-brush: 'Nanum Brush Script', cursive;
+  --font-bn: 'Noto Sans Bengali', 'Inter', sans-serif;
+  --font-bn-serif: 'Noto Serif Bengali', serif;
+  --font-swiss: 'Archivo', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Plain CSS custom properties too, so `var(--ink)` etc. still works
+   inside inline SVGs. */
+:root {
+  --paper: #efe6cc;
+  --paper-2: #e6d8b0;
+  --paper-card: #f8f1dd;
+  --ink: #1c1712;
+  --ink-soft: #4d4432;
+  --ink-faint: #7a6f57;
+  --red: #a3272a;
+  --red-deep: #7a1c1f;
+  --red-tint: #f0dccf;
+  --line: #c9b98c;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(rgba(28,23,18,.045) 1px, transparent 1px),
+    radial-gradient(ellipse 900px 500px at 50% 0%, rgba(163,39,42,.05), transparent 60%),
+    radial-gradient(160px 120px at 94% 6%, rgba(28,23,18,.05), transparent 70%),
+    radial-gradient(200px 150px at 4% 90%, rgba(28,23,18,.04), transparent 70%);
+  background-size: 3px 3px, auto, auto, auto;
+  color: var(--ink);
+  font-family: var(--font-bn);
+  line-height: 1.6;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+::selection { background: var(--red); color: #fff; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 99px; }
+
+/* Torn-paper edge, reused by "scroll card" style blocks. */
+.torn-edge-top::before, .torn-edge-bottom::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 11px;
+  background-image:
+    linear-gradient(135deg, var(--paper-card) 50%, transparent 51%),
+    linear-gradient(-135deg, var(--paper-card) 50%, transparent 51%);
+  background-size: 16px 16px;
+  background-repeat: repeat-x;
+  pointer-events: none;
+}
+.torn-edge-top::before { top: -10px; }
+.torn-edge-bottom::after { bottom: -10px; transform: scaleY(-1); }
+
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+.animate-bob { animation: bob 1.6s ease-in-out infinite; }
+
+@keyframes pulse-block { 0% { transform: scale(.85); } 60% { transform: scale(1.06); } 100% { transform: scale(1); } }
+.animate-pulse-once { animation: pulse-block .35s ease; }
