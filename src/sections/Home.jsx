@@ -1,12 +1,5 @@
 import { Eyebrow } from '../components/UI.jsx';
-
-const STATS = [
-  { num: '40+', label: 'হাংগুল বর্ণ' },
-  { num: '১–১০ কোটি', label: 'সংখ্যা পদ্ধতি' },
-  { num: '১৮', label: 'শব্দভাণ্ডার বিভাগ' },
-  { num: '৯', label: 'বাস্তব সংলাপ' },
-  { num: '১০', label: 'প্রশ্নের কুইজ' },
-];
+import { HeroArt } from '../components/Icons.jsx';
 
 const WHYS = [
   {
@@ -34,26 +27,23 @@ const PATH = [
 export default function Home({ goTo }) {
   return (
     <div>
-      {/* Hero */}
-      <div className="relative min-h-[70vh] flex flex-col justify-center overflow-hidden border-b-2 border-ink
-        -mx-4 sm:-mx-14 px-4 sm:px-14 py-16 pb-14">
-        <div className="absolute font-hero font-extrabold text-[min(60vw,620px)] leading-none select-none
-          pointer-events-none z-0" style={{ color: 'rgba(28,23,18,.06)', top: '-8%', right: '-8%' }}>
-          한
-        </div>
-        <div className="absolute z-[1]" style={{ top: '8%', right: '8%' }}>
-          <div className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] border-[5px] border-red rounded-[10px]
-            flex items-center justify-center shadow-xl -rotate-3" style={{ background: 'rgba(240,220,207,.5)' }}>
-            <span className="font-brush text-[2.6rem] text-red rotate-[4deg]">韓</span>
-          </div>
-        </div>
+      {/* Hero — full ink-wash landscape banner with brush-ink text over it */}
+      <div className="relative min-h-[78vh] flex flex-col justify-end overflow-hidden border-b-2 border-ink
+        -mx-4 sm:-mx-14 px-4 sm:px-14 pb-14">
+        <HeroArt />
+        {/* darkening scrim so the black ink text stays legible over the painting */}
+        <div className="absolute inset-0" style={{
+          background: 'linear-gradient(180deg, rgba(28,23,18,.08) 0%, rgba(28,23,18,.12) 40%, rgba(239,230,204,.94) 88%)',
+        }} />
+        <div className="absolute inset-0 border-b-2 border-ink pointer-events-none" style={{ mixBlendMode: 'multiply', opacity: .05 }} />
 
-        <div className="relative z-[2] max-w-[760px]">
+        <div className="relative z-[2] max-w-[760px] pt-24">
           <span className="font-mono tracking-[.2em] uppercase text-[.78rem] text-red font-bold border-b-2
-            border-red inline-block pb-1">
+            border-red inline-block pb-1 bg-paper/70 px-1">
             시작하기 · শুরু করা যাক
           </span>
-          <h1 className="font-hero font-extrabold text-[clamp(2.2rem,7vw,4.6rem)] mt-5 leading-[1.05] -tracking-[.01em]">
+          <h1 className="font-hero font-extrabold text-[clamp(2.2rem,7vw,4.6rem)] mt-5 leading-[1.05] -tracking-[.01em]
+            text-ink drop-shadow-[0_2px_10px_rgba(239,230,204,.9)]">
             শূন্য থেকে কোরিয়ান ভাষা শেখা
           </h1>
           <div className="font-bn-serif font-bold text-red-deep text-[1.15rem] sm:text-[1.25rem] mt-2.5">
@@ -83,17 +73,6 @@ export default function Home({ goTo }) {
           flex items-center gap-2">
           নিচে স্ক্রল করুন <span className="animate-bob">↓</span>
         </div>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 border-t-2 border-b-2 border-ink">
-        {STATS.map((s, i) => (
-          <div key={i} className="p-5 px-3.5 text-center border-r border-line last:border-r-0
-            border-b sm:border-b-0 [&:nth-last-child(-n+1)]:border-b-0">
-            <div className="font-swiss text-[clamp(1.6rem,4vw,2.4rem)] font-black text-red">{s.num}</div>
-            <div className="font-bn text-[.76rem] text-ink-soft mt-1 font-semibold">{s.label}</div>
-          </div>
-        ))}
       </div>
 
       {/* Why blocks */}

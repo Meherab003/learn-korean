@@ -99,3 +99,127 @@ export function FolkIllustration() {
     </svg>
   );
 }
+
+// ============================================================
+// HERO ART — full ink-wash landscape used behind the home page
+// banner: layered mountains, pines, a red sun, a crane and cloud
+// bands, in the style of a Joseon-era minhwa/folk painting.
+// ============================================================
+export function HeroArt({ className = 'absolute inset-0 w-full h-full' }) {
+  return (
+    <svg viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice" className={className}>
+      <defs>
+        <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#f3e9ce" />
+          <stop offset="55%" stopColor="#ecdfbb" />
+          <stop offset="100%" stopColor="#dfcd9c" />
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="800" fill="url(#heroSky)" />
+
+      {/* sun */}
+      <circle cx="1180" cy="230" r="88" fill="var(--red)" opacity="0.88" />
+
+      {/* far mountains */}
+      <path d="M0 430 Q140 300 320 400 T650 380 Q820 300 980 400 T1310 370 Q1460 320 1600 400 V800 H0 Z"
+        fill="var(--ink)" opacity="0.16" />
+      {/* mid mountains */}
+      <path d="M0 500 Q220 340 460 470 Q620 360 800 470 Q980 370 1180 480 Q1360 400 1600 480 V800 H0 Z"
+        fill="var(--ink)" opacity="0.26" />
+
+      {/* cloud bands */}
+      <g stroke="var(--paper)" strokeWidth="4" fill="none" opacity="0.75" strokeLinecap="round">
+        <path d="M-20 470 Q140 455 300 470 T620 470 T940 470 T1260 470 T1620 470" />
+        <path d="M-20 560 Q160 545 340 560 T680 560 T1020 560 T1360 560 T1620 560" />
+      </g>
+
+      {/* pine tree — left */}
+      <g stroke="var(--ink)" strokeWidth="6" fill="none" strokeLinecap="round" opacity="0.9">
+        <path d="M120 800 C110 640 150 560 130 460" />
+        <path d="M130 460 Q60 440 40 490" />
+        <path d="M130 460 Q60 400 20 430" />
+        <path d="M150 560 Q220 545 250 580" />
+        <path d="M150 560 Q230 520 260 540" />
+      </g>
+      <g fill="var(--ink)" opacity="0.75">
+        <ellipse cx="60" cy="420" rx="70" ry="26" />
+        <ellipse cx="40" cy="470" rx="80" ry="28" />
+        <ellipse cx="220" cy="545" rx="70" ry="24" />
+      </g>
+
+      {/* pine tree — right */}
+      <g stroke="var(--ink)" strokeWidth="6" fill="none" strokeLinecap="round" opacity="0.9">
+        <path d="M1420 800 C1435 660 1390 580 1415 480" />
+        <path d="M1415 480 Q1500 455 1530 500" />
+        <path d="M1415 480 Q1495 415 1550 440" />
+      </g>
+      <g fill="var(--ink)" opacity="0.75">
+        <ellipse cx="1500" cy="440" rx="75" ry="26" />
+        <ellipse cx="1520" cy="495" rx="85" ry="28" />
+      </g>
+
+      {/* flying crane */}
+      <g fill="none" stroke="var(--ink)" strokeWidth="3.5" strokeLinecap="round">
+        <path d="M540 210 Q590 170 650 195 Q690 210 720 190" />
+        <path d="M650 195 Q660 230 690 250" />
+        <line x1="690" y1="250" x2="700" y2="285" />
+        <line x1="690" y1="250" x2="675" y2="285" />
+      </g>
+
+      {/* near hills / waves for grounding */}
+      <path d="M0 660 Q260 600 540 655 Q800 600 1060 655 Q1340 600 1600 655 V800 H0 Z"
+        fill="var(--ink)" opacity="0.34" />
+    </svg>
+  );
+}
+
+// Faint ink-wash misty mountains, used as a subtle backdrop behind cards
+// (e.g. the dialogue scroll) so pages feel like part of the same painting.
+export function MistyMountains({ className = 'absolute inset-0 w-full h-full pointer-events-none' }) {
+  return (
+    <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid slice" className={className}>
+      <path d="M0 190 Q120 110 260 170 Q380 90 520 170 Q650 110 800 175 V300 H0 Z" fill="var(--ink)" opacity="0.05" />
+      <path d="M0 230 Q160 170 340 220 Q500 160 660 220 Q740 195 800 220 V300 H0 Z" fill="var(--ink)" opacity="0.07" />
+      <g stroke="var(--ink)" strokeWidth="2" opacity="0.06" fill="none">
+        <path d="M-20 205 Q160 190 340 205 T700 205 T820 205" />
+      </g>
+    </svg>
+  );
+}
+
+// Two figures in hanbok, seated and conversing, folk-painting style —
+// larger and more detailed than FolkIllustration, used on the Dialogue
+// page. `flip` mirrors the pose so repeated scenes don't look identical.
+export function TalkingPair({ flip = false, className = '' }) {
+  return (
+    <svg viewBox="0 0 360 190" className={className} style={flip ? { transform: 'scaleX(-1)' } : undefined}>
+      <ellipse cx="180" cy="172" rx="150" ry="8" fill="var(--ink)" opacity="0.08" />
+      {/* speech swirl between them */}
+      <path d="M150 55 Q180 35 210 55" fill="none" stroke="var(--red)" strokeWidth="2" strokeDasharray="1 7" strokeLinecap="round" opacity="0.85" />
+      <circle cx="180" cy="24" r="8" fill="none" stroke="var(--red)" strokeWidth="2" opacity="0.85" />
+
+      {/* figure A — seated, facing right */}
+      <g stroke="var(--ink)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" fill="var(--paper-card)">
+        <circle cx="118" cy="66" r="13" />
+        <path d="M107 60 Q118 44 129 60" fill="var(--ink)" stroke="none" />
+        <path d="M118 79 C90 92 78 120 84 158 L162 158 C158 122 150 96 130 82 Z" />
+        <path d="M118 100 Q140 108 150 132" fill="none" />
+        <path d="M96 158 L88 172" />
+        <path d="M150 158 L160 172" />
+      </g>
+
+      {/* figure B — seated, facing left */}
+      <g stroke="var(--ink)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" fill="var(--paper-card)">
+        <circle cx="244" cy="66" r="13" />
+        <path d="M233 58 Q244 42 255 58 Q257 52 244 50 Q231 52 233 58 Z" fill="var(--ink)" stroke="none" />
+        <path d="M244 79 C272 92 284 120 278 158 L200 158 C204 122 212 96 232 82 Z" />
+        <path d="M244 100 Q222 108 212 132" fill="none" />
+        <path d="M266 158 L274 172" />
+        <path d="M212 158 L202 172" />
+      </g>
+
+      {/* small floor mat lines */}
+      <path d="M70 160 H290" stroke="var(--ink)" strokeWidth="1.4" opacity="0.35" />
+    </svg>
+  );
+}

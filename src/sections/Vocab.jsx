@@ -38,8 +38,8 @@ export default function Vocab() {
 
       <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))' }}>
         {items.map((v, i) => (
-          <div key={i} className="relative bg-paper-card border border-line border-l-[5px] border-l-red rounded-sm
-            p-4 pb-3.5 shadow flex flex-col min-h-[150px]">
+          <div key={i} className="card-aged relative border border-line border-l-[5px] border-l-red rounded-sm
+            p-4 pb-3.5 flex flex-col min-h-[150px]">
             <span className="font-mono text-[.6rem] text-red uppercase tracking-[.09em] font-bold">{CATS[v.cat]}</span>
             <SpeakerButton text={v.kr} className="absolute top-3 right-3" />
             <div className="font-hero text-[1.85rem] font-extrabold mt-2 leading-tight pr-7">{v.kr}</div>

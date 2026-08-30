@@ -71,7 +71,7 @@ export default function Grammar() {
 
       <div className="mt-2.5 space-y-4">
         {items.map((g) => (
-          <div key={g.pat} className={`bg-paper-card border border-line rounded p-[18px] border-l-[5px]
+          <div key={g.pat} className={`card-aged border border-line rounded p-[18px] border-l-[5px]
             ${g.level === 2 ? 'border-l-red' : 'border-l-ink'}`}>
             <div className="flex items-baseline gap-2.5 flex-wrap">
               <span className="font-hero text-xl text-red font-extrabold">{g.icon}</span>

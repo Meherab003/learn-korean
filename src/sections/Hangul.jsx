@@ -41,7 +41,35 @@ export default function Hangul() {
       </div>
       <InkDivider />
 
-      <Eyebrow>বর্ণের আকৃতি কোথা থেকে এলো</Eyebrow>
+      {/* All letters written out on an aged practice sheet, brush-ink style */}
+      <div className="relative border-x border-line bg-paper-card px-5 sm:px-8 py-7 shadow-xl torn-edge-top torn-edge-bottom overflow-hidden">
+        <div className="absolute inset-0 grid-sheet opacity-70" />
+        <div className="absolute top-3 right-4 sm:right-6 w-14 h-14 rounded-sm bg-red flex items-center
+          justify-center rotate-[-6deg] shadow-lg">
+          <span className="font-hero text-white font-black text-xl">韓</span>
+        </div>
+        <div className="relative">
+          <Eyebrow>모든 글자 · সব বর্ণ এক নজরে</Eyebrow>
+          <div className="flex flex-wrap gap-x-3 gap-y-2 justify-center mt-4 max-w-[820px] mx-auto">
+            {[...CONS, ...TENSE, ...VOWELS, ...DIP].map((it, i) => (
+              <span
+                key={i}
+                title={`${it.rom} — ${it.bn}`}
+                className="font-kr font-black text-ink text-[2.1rem] sm:text-[2.5rem] leading-none cursor-default
+                  transition hover:text-red hover:-translate-y-0.5"
+                style={{ textShadow: '0 1px 0 rgba(28,23,18,.08)' }}
+              >
+                {it.g}
+              </span>
+            ))}
+          </div>
+          <p className="font-bn text-ink-faint text-[.78rem] text-center mt-4">
+            নিচের বিভাগগুলো থেকে একটি বর্ণে ক্লিক করলে তার উচ্চারণ ও উদাহরণ দেখতে পাবেন
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-9"><Eyebrow>বর্ণের আকৃতি কোথা থেকে এলো</Eyebrow></div>
       <p className="font-bn text-ink-soft mt-1.5">
         প্রতিটি মৌলিক ব্যঞ্জনবর্ণ শরীরের অঙ্গের আকৃতি থেকে ডিজাইন করা — সিলমোহরের মতো নিচের চারটি ক্লিক করে দেখুন
       </p>

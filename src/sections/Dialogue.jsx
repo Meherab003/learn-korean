@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { DIALOGUES } from '../data/dialogues.js';
 import { Eyebrow, SpeakerButton } from '../components/UI.jsx';
-import { InkDivider, SceneIcon, FolkIllustration } from '../components/Icons.jsx';
+import { InkDivider, SceneIcon, TalkingPair, MistyMountains } from '../components/Icons.jsx';
+
+// Scenes alternate the illustration's facing direction and give each
+// scenario its own small ink accent, so the page doesn't feel like the
+// same picture repeated eight times.
+const SCENE_KEYS = Object.keys(DIALOGUES);
 
 export default function Dialogue() {
   const [current, setCurrent] = useState('intro');
   const d = DIALOGUES[current];
+  const flip = SCENE_KEYS.indexOf(current) % 2 === 1;
 
   return (
     <div>
@@ -17,7 +23,7 @@ export default function Dialogue() {
       <InkDivider />
 
       <div className="grid gap-2.5 mt-4" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))' }}>
-        {Object.keys(DIALOGUES).map((k) => {
+        {SCENE_KEYS.map((k) => {
           const dd = DIALOGUES[k];
           const on = k === current;
           return (
@@ -39,11 +45,12 @@ export default function Dialogue() {
         })}
       </div>
 
-      <div className="relative border-x border-line bg-paper-card px-5 py-6.5 shadow-xl mt-7 mb-7 torn-edge-top torn-edge-bottom">
-        <div className="flex justify-center pb-4 pt-1.5">
-          <FolkIllustration />
+      <div className="relative border-x border-line bg-paper-card px-5 py-6.5 shadow-xl mt-7 mb-7 torn-edge-top torn-edge-bottom overflow-hidden">
+        <MistyMountains />
+        <div className="relative flex justify-center pb-4 pt-1.5">
+          <TalkingPair key={current} flip={flip} className="w-[260px] sm:w-[300px] h-auto" />
         </div>
-        <div className="border-t-2 border-ink mt-1">
+        <div className="relative border-t-2 border-ink mt-1">
           {d.lines.map((l, i) => (
             <div key={i} className="grid gap-4 py-4 px-1 border-b border-dashed border-line"
               style={{ gridTemplateColumns: '96px 1fr' }}>
