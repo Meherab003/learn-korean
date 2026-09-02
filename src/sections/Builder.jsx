@@ -6,15 +6,20 @@ import { speak } from '../utils/speak.js';
 
 function ChipRow({ id, items, selected, onSelect }) {
   return (
-    <div className="flex flex-wrap gap-1.5 max-h-[150px] overflow-y-auto p-0.5">
+    <div className="flex flex-wrap gap-2  overflow-y-auto p-2.5 bg-paper-card rounded-sm shadow-inner">
       {items.map((ch, i) => (
         <button
           key={i}
           onClick={() => onSelect(i)}
-          className={`border rounded px-2.5 py-1.5 font-hero text-[1.05rem] cursor-pointer transition
-            ${selected === i ? 'bg-red text-white border-red' : 'bg-paper-card border-line hover:border-red'}`}
+          className={`min-w-[48px] h-[48px] px-2 rounded-sm border-2 font-hero font-extrabold
+            text-[1.4rem] cursor-pointer transition flex items-center justify-center
+            ${selected === i
+              ? 'bg-red text-white border-red shadow-md scale-[1.08]'
+              : 'bg-paper text-ink border-line hover:border-red hover:text-red hover:-translate-y-0.5'}`}
         >
-          {id === 'final' && ch === '' ? '(নেই)' : ch}
+          {id === 'final' && ch === ''
+            ? <span className="text-[.62rem] font-bn font-bold leading-tight">নেই</span>
+            : ch}
         </button>
       ))}
     </div>
@@ -47,7 +52,8 @@ export default function Builder() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         <div>
           <div className="mb-3.5">
-            <div className="font-mono text-[.72rem] uppercase tracking-[.1em] text-ink-soft mb-1.5">
+            <div className="inline-flex items-center gap-2 font-swiss font-extrabold text-[.78rem]
+              uppercase tracking-[.08em] text-red mb-2 bg-red-tint px-2.5 py-1 rounded-sm">
               ১. প্রথম ব্যঞ্জনবর্ণ (Initial) — বাধ্যতামূলক
             </div>
             <ChipRow id="cho" items={CHO} selected={cho} onSelect={select(setCho)} />

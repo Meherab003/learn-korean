@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { VOCAB, CATS } from '../data/vocab.js';
 import { Eyebrow, SpeakerButton } from '../components/UI.jsx';
 import { InkDivider } from '../components/Icons.jsx';
+import { MugunghwaMotif } from '../components/Icons.jsx';
 
 export default function Vocab() {
   const [filter, setFilter] = useState('all');
@@ -10,7 +11,9 @@ export default function Vocab() {
   return (
     <div>
       <Eyebrow>05 · 어휘</Eyebrow>
-      <h1 className="font-hero font-extrabold text-3xl mt-1">শব্দভাণ্ডার</h1>
+      <h1 className="font-hero font-extrabold text-3xl mt-1 flex items-center gap-2">
+        শব্দভাণ্ডার <MugunghwaMotif className="w-7 h-7 inline-block" />
+      </h1>
       <div className="font-bn font-semibold text-ink-soft mt-0.5">
         প্রতিটি কার্ডে কোরিয়ান শব্দ (বড়), তার উচ্চারণ, এবং বাংলা ও ইংরেজি অর্থ একসাথে দেখানো হয়েছে।
       </div>

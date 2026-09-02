@@ -25,12 +25,15 @@ const SECTIONS = {
 const TOTAL_SECTIONS = Object.keys(SECTIONS).length;
 
 export default function App() {
-  const [current, setCurrent] = useState('home');
-  const [visited, setVisited] = useState(new Set(['home']));
+  const [current, setCurrent] = useState(() => {
+    try { return localStorage.getItem('khb-section') || 'home'; } catch { return 'home'; }
+  });
+  const [visited, setVisited] = useState(new Set(['home', current]));
   const [menuOpen, setMenuOpen] = useState(false);
 
   function goTo(sec) {
     setCurrent(sec);
+    try { localStorage.setItem('khb-section', sec); } catch { /* ignore */ }
     setVisited((prev) => new Set(prev).add(sec));
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });

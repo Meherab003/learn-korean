@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { DIALOGUES } from '../data/dialogues.js';
 import { Eyebrow, SpeakerButton } from '../components/UI.jsx';
-import { InkDivider, SceneIcon, TalkingPair, MistyMountains } from '../components/Icons.jsx';
+import { InkDivider, SceneIcon, TalkingPair, StandingPair, MistyMountains, PalaceMotif } from '../components/Icons.jsx';
 
 // Scenes alternate the illustration's facing direction and give each
 // scenario its own small ink accent, so the page doesn't feel like the
-// same picture repeated eight times.
+// same picture repeated eight times. Outdoor/public scenes get a standing
+// pose with a faint palace backdrop; indoor/seated scenes keep the
+// original talking pair.
 const SCENE_KEYS = Object.keys(DIALOGUES);
+const OUTDOOR = new Set(['directions', 'market', 'weather']);
 
 export default function Dialogue() {
   const [current, setCurrent] = useState('intro');
   const d = DIALOGUES[current];
   const flip = SCENE_KEYS.indexOf(current) % 2 === 1;
+  const outdoor = OUTDOOR.has(current);
 
   return (
     <div>
@@ -47,8 +51,15 @@ export default function Dialogue() {
 
       <div className="relative border-x border-line bg-paper-card px-5 py-6.5 shadow-xl mt-7 mb-7 torn-edge-top torn-edge-bottom overflow-hidden">
         <MistyMountains />
+        {outdoor && (
+          <div className="absolute bottom-0 left-0 right-0 opacity-25 pointer-events-none">
+            <PalaceMotif className="w-full h-auto" />
+          </div>
+        )}
         <div className="relative flex justify-center pb-4 pt-1.5">
-          <TalkingPair key={current} flip={flip} className="w-[260px] sm:w-[300px] h-auto" />
+          {outdoor
+            ? <StandingPair key={current} flip={flip} className="w-[260px] sm:w-[300px] h-auto" />
+            : <TalkingPair key={current} flip={flip} className="w-[260px] sm:w-[300px] h-auto" />}
         </div>
         <div className="relative border-t-2 border-ink mt-1">
           {d.lines.map((l, i) => (

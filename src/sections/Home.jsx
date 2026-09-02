@@ -1,5 +1,5 @@
 import { Eyebrow } from '../components/UI.jsx';
-import { HeroArt } from '../components/Icons.jsx';
+import { HeroArt, PalaceMotif } from '../components/Icons.jsx';
 
 const WHYS = [
   {
@@ -73,6 +73,10 @@ export default function Home({ goTo }) {
           flex items-center gap-2">
           নিচে স্ক্রল করুন <span className="animate-bob">↓</span>
         </div>
+      </div>
+
+      <div className="flex justify-center py-6 opacity-80">
+        <PalaceMotif className="w-[280px] sm:w-[380px] h-auto" />
       </div>
 
       {/* Why blocks */}

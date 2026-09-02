@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { VOWELS, DIP, CONS, TENSE } from '../data/hangul.js';
 import { Eyebrow, SpeakerButton } from '../components/UI.jsx';
 import { InkDivider } from '../components/Icons.jsx';
+import { MugunghwaMotif } from '../components/Icons.jsx';
 
 // The four consonants whose shapes are said to trace body/mouth parts.
 const ORIGIN_TAGS = { 'ㄱ': 'জিহ্বা + তালু', 'ㄴ': 'জিহ্বার ডগা', 'ㅁ': 'মুখের আকৃতি', 'ㅇ': 'গলার আকৃতি' };
@@ -47,6 +48,7 @@ export default function Hangul() {
           justify-center rotate-[-6deg] shadow-lg">
           <span className="font-hero text-white font-black text-xl">韓</span>
         </div>
+
         <div className="relative">
           <Eyebrow>모든 글자 · সব বর্ণ এক নজরে</Eyebrow>
           <div className="flex flex-wrap gap-x-3 gap-y-2 justify-center mt-4 max-w-[820px] mx-auto">

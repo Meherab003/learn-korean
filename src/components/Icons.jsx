@@ -223,3 +223,77 @@ export function TalkingPair({ flip = false, className = '' }) {
     </svg>
   );
 }
+
+// Simplified Gyeongbokgung-style multi-tier palace roofline, ink-line only.
+export function PalaceMotif({ className = 'w-full h-auto' }) {
+  return (
+    <svg viewBox="0 0 400 140" className={className} fill="none" stroke="var(--ink)"
+      strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" opacity="0.85">
+      <path d="M20 120 H380" />
+      <path d="M40 120 V90 H360 V120" />
+      <path d="M20 90 L60 62 H340 L380 90 Z" fill="var(--paper-card)" />
+      <path d="M90 62 L120 40 H280 L310 62 Z" fill="var(--paper-card)" />
+      <path d="M150 40 L170 22 H230 L250 40 Z" fill="var(--paper-card)" />
+      <circle cx="200" cy="14" r="4" fill="var(--red)" stroke="none" />
+      <line x1="60" y1="90" x2="60" y2="120" />
+      <line x1="150" y1="90" x2="150" y2="120" />
+      <line x1="250" y1="90" x2="250" y2="120" />
+      <line x1="340" y1="90" x2="340" y2="120" />
+      <line x1="110" y1="62" x2="110" y2="90" opacity="0.6" />
+      <line x1="290" y1="62" x2="290" y2="90" opacity="0.6" />
+    </svg>
+  );
+}
+
+// Mugunghwa (hibiscus) — Korea's national flower, five-petal ink motif.
+export function MugunghwaMotif({ className = 'w-10 h-10' }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className}>
+      <g fill="none" stroke="var(--red)" strokeWidth="1.8" opacity="0.9">
+        {[0, 72, 144, 216, 288].map((deg) => (
+          <ellipse key={deg} cx="30" cy="18" rx="9" ry="14" transform={`rotate(${deg} 30 30)`} />
+        ))}
+      </g>
+      <circle cx="30" cy="30" r="4" fill="var(--ink)" />
+    </svg>
+  );
+}
+
+// Flying crane — folk-painting fauna motif, standalone accent version.
+export function CraneMotif({ className = 'w-16 h-16' }) {
+  return (
+    <svg viewBox="0 0 80 80" className={className} fill="none" stroke="var(--ink)"
+      strokeWidth="2.4" strokeLinecap="round" opacity="0.85">
+      <path d="M14 50 Q30 30 46 42 Q56 50 66 40" />
+      <path d="M46 42 Q50 60 66 66" />
+      <line x1="66" y1="66" x2="72" y2="76" />
+      <line x1="66" y1="66" x2="58" y2="76" />
+      <circle cx="14" cy="50" r="3" fill="var(--red)" stroke="none" />
+    </svg>
+  );
+}
+
+// A pair of figures standing (for outdoor/street/market dialogue scenes),
+// distinct pose from TalkingPair so the Dialogue page doesn't repeat itself.
+export function StandingPair({ flip = false, className = '' }) {
+  return (
+    <svg viewBox="0 0 360 190" className={className} style={flip ? { transform: 'scaleX(-1)' } : undefined}>
+      <ellipse cx="180" cy="178" rx="150" ry="7" fill="var(--ink)" opacity="0.08" />
+      <g stroke="var(--ink)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" fill="var(--paper-card)">
+        <circle cx="126" cy="48" r="12" />
+        <path d="M115 42 Q126 27 137 42" fill="var(--ink)" stroke="none" />
+        <path d="M126 60 C104 70 96 100 100 172 L152 172 C150 104 146 76 132 62 Z" />
+        <line x1="100" y1="110" x2="78" y2="140" />
+        <line x1="152" y1="110" x2="172" y2="96" />
+      </g>
+      <g stroke="var(--ink)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" fill="var(--paper-card)">
+        <circle cx="236" cy="48" r="12" />
+        <path d="M225 41 Q236 26 247 41 Q249 35 236 33 Q223 35 225 41 Z" fill="var(--ink)" stroke="none" />
+        <path d="M236 60 C258 70 266 100 262 172 L212 172 C213 104 218 76 230 62 Z" />
+        <line x1="262" y1="112" x2="284" y2="130" />
+        <line x1="212" y1="112" x2="196" y2="98" />
+      </g>
+      <path d="M85 172 H275" stroke="var(--ink)" strokeWidth="1.4" opacity="0.3" />
+    </svg>
+  );
+}
